@@ -1,11 +1,88 @@
-<h1> Jhomar Baluca </h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+        Jhomar Baluca
+    </title>
+  </head>
 
-<br />
+  <body
+    <div id="app">
 
-<h5>
-  Hello there !
-</h5>
+      <h1> This is is build with vuejs </h1>
+      <div id="counter">
+        Counter: {{ counter }}
+      </div>
 
-<h6>
-  Welcome to my site, at this moment this site is underconstruction to share my activity and doings.
-</h6>
+
+      <div id="event-handling">
+
+        <h1>{{ message }} </h1>
+        <h5>
+          Who am i?
+        </h5>
+
+        <p>
+          "Experience is the name everyone gives to their mistakes." - Oscar Wilde
+        </p>
+
+        <button v-on:click="reverseMessage">Reverse My Name</button>
+      </div>
+      
+      <div id="todo-list-app">
+        <p> I am : </p>
+        <ol> 
+          <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+          ></todo-item>
+        </ol>
+      </div>
+
+      <div>
+        <p>
+          This page is undersconstruction to hightlights my works and activity about programming.
+        </p>
+      </div>
+    </div>
+  </body>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+  const Counter = {
+    data() {
+      return {
+        counter: 0,
+        message: "Jhomar Baluca",
+        groceryList: [  
+          { id: 0, text: 'Cool' },
+          { id: 1, text: 'Chill' },
+          { id: 2, text: 'Relax' }
+        ]
+      }
+    },
+    mounted() {
+      setInterval(() => {
+        this.counter++
+      }, 1000)
+    },
+    methods: {
+      reverseMessage() {
+        this.message = this.message
+          .split('')
+          .reverse()
+          .join('')
+      }
+    }
+  }
+
+  const app = Vue.createApp(Counter);
+
+  app.component('todo-item', {
+    props: [ 'todo' ],
+    template: `<li> {{ todo.text }} </li>`
+  })
+  app.mount('#app')
+</script>
+</html>
